@@ -54,4 +54,4 @@ runs:
         [ ${{ inputs.icon }} != "NONE" ] && ICON=--icon=${{ inputs.icon }}.ico
         pip install pyinstaller==${{ inputs.pyinstaller_version }}
         pyinstaller --clean -y --dist ${{ inputs.dist }} $NO_CONSOLE $ICON --name ${{ inputs.artifact }} --onefile ${{ inputs.main }}.py
-        chown -R $(stat -c '%u:%g' .) ${{ inputs.dist }}
+        # chown -R $(stat -c '%u:%g' .) ${{ inputs.dist }}
