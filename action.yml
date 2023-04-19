@@ -42,7 +42,7 @@ runs:
   using: "composite"
   steps: 
     - name: setup python 3.9.7
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v3
       with:
         python-version: ${{ inputs.python_version }}
     - name: build exe with pyinstaller
@@ -54,4 +54,4 @@ runs:
         [ ${{ inputs.icon }} != "NONE" ] && ICON=--icon=${{ inputs.icon }}.ico
         pip install pyinstaller==${{ inputs.pyinstaller_version }}
         pyinstaller --clean -y --dist ${{ inputs.dist }} $NO_CONSOLE $ICON --name ${{ inputs.artifact }} --onefile ${{ inputs.main }}.py
-        chown -R --reference=. ${{ inputs.dist }}
+        chown -R $(stat -c '%u:%g' .) ${{ inputs.dist }}
